@@ -14,7 +14,8 @@ Puma::Plugin.create do
   private
 
   def ngrok_start!
-    puts "[puma-ngrok-tunnel] Tunneling at: #{Ngrok::Tunnel.start(options)}"
+    Ngrok::Tunnel.start(options)
+    puts "[puma-ngrok-tunnel] Tunneling at: #{Ngrok::Tunnel.ngrok_url_https}"
   rescue Ngrok::FetchUrlError => e
     puts "[puma-ngrok-tunnel] Unable connect to ngrok server (You might be offline): #{e}"
   rescue Ngrok::Error => e
